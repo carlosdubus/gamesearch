@@ -1,0 +1,15 @@
+{
+	"game_store": {
+		"data_dir": "data/games"
+	},
+	"feeds": {
+		"giantbomb": {
+			"path": "gamesearch.feeds.giantbomb.GiantBombFeed",
+			"ingest": true,
+			"params":{
+				"api_key": "6fe6fb576b0c7bef2364938b2248e1628759508d",
+				"platforms": [21, 9, 43]
+			}
+		}
+	}
+}
