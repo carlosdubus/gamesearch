@@ -1,3 +1,11 @@
+"""
+    ingest.py
+    Ingests feeds from the config file
+    Usage:
+    python ingest.py
+
+    GSEARCH_CONFIG_FILE=/path/to/config.json python ingest.py
+"""
 import config
 import json
 
