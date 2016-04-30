@@ -32,3 +32,19 @@ To issue a query make the following request:
 
 `GET /search?query=mario+party`
 
+## Config File
+
+The default location for the config file is `config.json`. If you want to change this, use `GSEARCH_CONFIG_FILE` environment variable.
+
+`GSEARCH_CONFIG_FILE=/path/to/config.json python ingest.py`
+
+### feeds
+
+The config file contains the available feeds. Each feed require at least the `path` key. The `path` key is the module.class path to import from python. This allows to install third party feeds using pip, and just reference them in the config file. 
+
+The `params` path is a dictionary of arguments to send to the feed constructor.
+
+`ingest` is a boolean that specifies if this feed should be ingested or not when running `ingest.py`
+
+
+
