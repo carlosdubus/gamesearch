@@ -46,15 +46,19 @@ The default location for the config file is `config.json`. If you want to change
 
 `GSEARCH_CONFIG_FILE=/path/to/config.json python ingest.py`
 
-### feeds
+### config.feeds
 
-The config file contains the available feeds. Each feed requires at least the `path` key. 
+The config `feeds` key contains the available feeds. Each feed config requires at least the `path` key. 
 
 The `path` key is the module.class path to import from python. This allow us to install third party feeds using pip, and just reference them in the config file. 
 
 The `params` path is a dictionary of arguments to send to the feed constructor.
 
-`ingest` is a boolean that specifies if this feed should be ingested or not when running `ingest.py`
+`ingest` is a boolean that specifies if this feed should be ingested or not when running `ingest.py`.
+
+## Feed class
+
+The only requirement of a feed class is to implement the __iter__ method. See `gamesearch/feeds/giantbomb.py`. The __iter__ method should return a generator that yields game objects. `JsonFeed` is a base class that can be used by child feeds that handle jsondata.
 
 
 
