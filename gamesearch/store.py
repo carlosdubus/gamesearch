@@ -1,3 +1,17 @@
+"""
+    gamesearch.store
+
+    File based table to store the games
+    Usage:
+    gs = GameStore("data/games")
+
+    gs.add(Game(name="Mario Tennis"))
+    gs.add(Game(name="Mario Party 4"))
+    gs.add(Game(name="Dr. Mario"))
+    gs.add(Game(name="Big Party: Super Mario Fun Time"))
+    gs.add(Game(name="Tetris Party"))
+    print([g.name for g in gs.find_by_name("tetris")])
+"""
 import json
 from gamesearch.index import InvertedIndex
 import os
@@ -51,15 +65,3 @@ class Game:
         self.description = kwargs.get("description")
         self.summary = kwargs.get("summary")
         self.platforms = kwargs.get("platforms")
-
-
-# gs = GameStore("data/games")
-
-# # gs.add(Game(("Mario Tennis")))
-# # gs.add(Game(("Mario Party 4")))
-# # gs.add(Game(("Dr. Mario")))
-# # gs.add(Game(("Big Party: Super Mario Fun Time")))
-# # gs.add(Game(("Tetris Party")))
-# # gs.save("data/games.index")
-# # gs = GameStore.load("data/games.index")
-# print([g.name for g in gs.find_by_name("tetris")])

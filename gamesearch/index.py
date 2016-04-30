@@ -1,9 +1,19 @@
+"""
+    gamesearch.index
+"""
 import re
 import json
 import os.path
 
 
 class InvertedIndex:
+    """
+    File based inverted index
+
+    Each game name is split into tokens, each token contains a list of (game_ids, position) tuples.
+    Each token is a different file saved in self.path directory.
+    The inverted index is file based, so it does not require to hold anything in memory.
+    """
     def __init__(self, path=None):
         self.path = path
 
