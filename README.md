@@ -58,7 +58,7 @@ The `params` path is a dictionary of arguments to send to the feed constructor.
 
 ## Feed class
 
-The only requirement of a feed class is to implement the __iter__ method. See `gamesearch/feeds/giantbomb.py`. The __iter__ method should return a generator that yields game objects. `JsonFeed` is a base class that can be used by child feeds that handle jsondata.
+The only requirement of a feed class is to implement the __iter__ method. See `gamesearch/feeds/giantbomb.py`. The __iter__ method should return a generator that yields game objects. `JsonFeed` is a base class that can be used by child feeds that handle json data.
 
 
 
