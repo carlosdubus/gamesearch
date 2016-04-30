@@ -9,8 +9,11 @@ pip install flask
 
 ## Data Structures
 
-The search by name is done using an inverted index, see `gamesearch/index.py`. Each game name is split into tokens, each token contains a list of game_ids. Each token is a different file saved in data/games/index directory. 
-The inverted index is file based, so it does not require to hold anything in memory.
+The search by name is done using an inverted index, see `gamesearch/index.py`. Each game name is split into tokens, each token contains a list of (game_id, position) tuples. For each token, a list of game_ids and position is saved in a file in data/games/index directory. The game ids are in ascending order.
+
+To query compount words, I intersect the game_ids set for each token. See `gamesearch/index.py intersect()` I use an algorithm that takes advantage of the ascending order of game ids.
+
+The inverted index is file based, so it does not require to hold anything in memory. In addition, it allows the API to return new results without any downtime.
 
 ## Ingest
 
