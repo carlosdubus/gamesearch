@@ -7,6 +7,11 @@ Flask is needed to run the REST API.
 pip install flask
 `
 
+## Data Structures
+
+The search by name is done using an inverted index, see `gamesearch/index.py`. Each game name is split into tokens, each token contains a list of game_ids. Each token is a different file saved in data/games/index directory. 
+The inverted index is file based, so it does not require to hold anything in memory.
+
 ## Ingest
 
 To ingest the feeds, run the following command:
