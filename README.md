@@ -40,7 +40,9 @@ The default location for the config file is `config.json`. If you want to change
 
 ### feeds
 
-The config file contains the available feeds. Each feed require at least the `path` key. The `path` key is the module.class path to import from python. This allows to install third party feeds using pip, and just reference them in the config file. 
+The config file contains the available feeds. Each feed requires at least the `path` key. 
+
+The `path` key is the module.class path to import from python. This allow us to install third party feeds using pip, and just reference them in the config file. 
 
 The `params` path is a dictionary of arguments to send to the feed constructor.
 
