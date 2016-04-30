@@ -6,6 +6,12 @@ import json
 import os.path
 
 
+class PListRecord:
+    def __init__(self, doc_id, pos):
+        self.doc_id = doc_id
+        self.pos = pos
+
+
 class InvertedIndex:
     """
     File based inverted index
@@ -20,12 +26,30 @@ class InvertedIndex:
     def tokenize(self, text):
         return [s.lower() for s in re.split('\W+', text) if len(s) >= 2]
 
+    def intersect(self, plist1, plist2):
+        result = []
+        p1 = next(plist1, None)
+        p2 = next(plist2, None)
+        while p1 and p2:
+            if p1.doc_id == p2.doc_id:
+                result.append(p1)
+                p1 = next(plist1, None)
+                p2 = next(plist2, None)
+            elif p1.doc_id < p2.doc_id:
+                p1 = next(plist1, None)
+            else:
+                p2 = next(plist2, None)
+        return result
+
     def query(self, query):
-        sets = []
-        for token in self.tokenize(query):
-            docs = list(self.read_token(token))
-            sets.append(set([d[0] for d in docs]))
-        return set.intersection(*sets)
+        tokens = self.tokenize(query)
+        if not tokens:
+            return []
+        result = self.read_token(tokens.pop(0))
+        while len(tokens) > 0:
+            plist = self.read_token(tokens.pop(0))
+            result = self.intersect(iter(result), plist)
+        return list([p.doc_id for p in result])
 
     def write_token(self, token, hit):
         if not token:
@@ -40,7 +64,7 @@ class InvertedIndex:
         with open(token_path, "r") as fp:
             for line in fp:
                 r = line.split(",")
-                yield (r[0], r[1])
+                yield PListRecord(int(r[0]), int(r[1]))
 
     def add_document(self, text, doc_id):
         tokens = self.tokenize(text)
